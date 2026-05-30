@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: default
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: default
+    app.kubernetes.io/part-of: argocd
+spec:
+  description: Default Project
+  # Cho phép kéo code từ bất kỳ Git Repository nào
+  sourceRepos:
+    - "*"
+  # Cho phép deploy tới bất kỳ Cluster và Namespace nào
+  destinations:
+    - namespace: "*"
+      server: "*"
+  # Cho phép tạo các resource ở cấp độ cluster (Cần thiết vì bạn có dùng CreateNamespace=true)
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
